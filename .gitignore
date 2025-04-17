@@ -1,0 +1,44 @@
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Misc
+coverage/
+*.local
+
+# Ignore by pattern in any subdirectory
+**/node_modules/
+**/dist/
+**/build/
+**/*.log
+**/logs/
+**/.env
+**/.env.*
+**/coverage/
+**/.DS_Store
+**/Thumbs.db
+**/.vscode/
+**/.idea/
