@@ -1,9 +1,10 @@
 import express from "express";
 import taskRoutes from "./routes/task.js"
-
+import cors from "cors";
 const app = express();
 
 // Add middleware to parse JSON bodies
+app.use(cors())
 app.use(express.json());
 
 // Example route
