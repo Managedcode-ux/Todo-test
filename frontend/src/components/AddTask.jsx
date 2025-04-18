@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TASKS_API_URL } from '../api/TaskAPI';
 
 const AddTask = ({ onTaskAdded }) => {
   const [showInputs, setShowInputs] = useState(false);
@@ -24,7 +25,7 @@ const AddTask = ({ onTaskAdded }) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('http://localhost:3000/api/tasks/', {
+        const response = await fetch(TASKS_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ title, completed }),

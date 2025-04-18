@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './TodoItem.css';
+import { TASKS_API_URL } from '../api/TaskAPI';
 
 const TodoItem = ({ refreshSignal }) => {
   const [todos, setTodos] = useState([]);
@@ -12,7 +13,7 @@ const TodoItem = ({ refreshSignal }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:3000/api/tasks/');
+      const response = await fetch(TASKS_API_URL);
       if (!response.ok) {
         throw new Error('Failed to fetch tasks');
       }
@@ -31,7 +32,7 @@ const TodoItem = ({ refreshSignal }) => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+      const response = await fetch(`${TASKS_API_URL}${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -45,7 +46,7 @@ const TodoItem = ({ refreshSignal }) => {
 
   const markComplete = async (todo) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks/${todo.id}`, {
+      const response = await fetch(`${TASKS_API_URL}${todo.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const TodoItem = ({ refreshSignal }) => {
 
   const markIncomplete = async (todo) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks/${todo.id}`, {
+      const response = await fetch(`${TASKS_API_URL}${todo.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +106,7 @@ const TodoItem = ({ refreshSignal }) => {
   const handleEditKeyDown = async (e, todo) => {
     if (e.key === 'Enter') {
       try {
-        const response = await fetch(`http://localhost:3000/api/tasks/${todo.id}`, {
+        const response = await fetch(`${TASKS_API_URL}${todo.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
