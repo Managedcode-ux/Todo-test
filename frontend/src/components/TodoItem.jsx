@@ -38,6 +38,31 @@ const TodoItem = () => {
     }
   };
 
+  const handleComplete = async (todo) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/tasks/${todo.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: todo.title,
+          completed: true,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to mark task as complete');
+      }
+      setTodos((prevTodos) =>
+        prevTodos.map((t) =>
+          t.id === todo.id ? { ...t, completed: true } : t
+        )
+      );
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -48,7 +73,7 @@ const TodoItem = () => {
           <span className="todo-trash" role="img" aria-label="delete" onClick={() => handleDelete(todo.id)}>🗑️</span>
           <span className={`todo-title${todo.completed ? ' completed' : ''}`}>{todo.title}</span>
           <span className="todo-icons">
-            <span className="todo-icon" role="img" aria-label="complete">✔️</span>
+            <span className="todo-icon" role="img" aria-label="complete" onClick={() => handleComplete(todo)}>✔️</span>
             <span className="todo-icon" role="img" aria-label="edit">✏️</span>
             <span className="todo-icon" role="img" aria-label="cancel" >❌</span>
           </span>
