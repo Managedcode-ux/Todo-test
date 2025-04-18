@@ -1,5 +1,5 @@
 import pool from "../config/db.js";
-import { createTaskTableQuery, deleteTaskByIdQuery, updateTaskQuery, getAllTasksQuery } from "../models/Task.js";
+import { createTaskTableQuery, deleteTaskByIdQuery, updateTaskQuery, getAllTasksQuery, insertNewTask } from "../models/Task.js";
 
 export const createTask = async (req, res) => {
   const { title, completed } = req.body;
@@ -10,10 +10,7 @@ export const createTask = async (req, res) => {
     // Ensure the tasks table exists
     await pool.query(createTaskTableQuery);
     // Insert the new task
-    const result = await pool.query(
-      "INSERT INTO tasks (title, completed) VALUES ($1, $2) RETURNING *",
-      [title, completed]
-    );
+    const result = await pool.query(insertNewTask,[title, completed]);
     res.status(201).json(result.rows[0]);
   } catch (err) {
     res.status(500).json({ error: "Database error", details: err.message });

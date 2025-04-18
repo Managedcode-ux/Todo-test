@@ -9,6 +9,10 @@ export const createTaskTableQuery = `
   );
 `;
 
+export const insertNewTask = `
+  INSERT INTO tasks (title, completed) VALUES ($1, $2) RETURNING *;
+`;
+
 export const deleteTaskByIdQuery = `
   DELETE FROM tasks WHERE id = $1 RETURNING *;
 `;
