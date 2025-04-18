@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './TodoItem.css';
 
 const TodoItem = () => {
   const [todos, setTodos] = useState([]);
@@ -27,10 +28,16 @@ const TodoItem = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <ul>
+    <ul className="todo-list">
       {todos.map((todo) => (
-        <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-          {todo.title}
+        <li key={todo.id} className="todo-list-item">
+          <span className="todo-trash" role="img" aria-label="delete">🗑️</span>
+          <span className={`todo-title${todo.completed ? ' completed' : ''}`}>{todo.title}</span>
+          <span className="todo-icons">
+            <span className="todo-icon" role="img" aria-label="complete">✔️</span>
+            <span className="todo-icon" role="img" aria-label="edit">✏️</span>
+            <span className="todo-icon" role="img" aria-label="cancel">❌</span>
+          </span>
         </li>
       ))}
     </ul>

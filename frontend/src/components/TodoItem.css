@@ -1,0 +1,35 @@
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.todo-trash {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.todo-title {
+  flex: 1;
+}
+
+.todo-title.completed {
+  text-decoration: line-through;
+}
+
+.todo-icons {
+  display: flex;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.todo-icon {
+  cursor: pointer;
+}
