@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import './TodoItem.css';
 
-const TodoItem = () => {
+const TodoItem = ({ refreshSignal }) => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState('');
 
-  useEffect(() => {
-    const fetchTodos = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/tasks/');
-        if (!response.ok) {
-          throw new Error('Failed to fetch tasks');
-        }
-        const data = await response.json();
-        setTodos(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+  const fetchTodos = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('http://localhost:3000/api/tasks/');
+      if (!response.ok) {
+        throw new Error('Failed to fetch tasks');
       }
-    };
+      const data = await response.json();
+      setTodos(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [refreshSignal]);
 
   const handleDelete = async (id) => {
     try {
