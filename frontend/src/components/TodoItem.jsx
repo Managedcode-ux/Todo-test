@@ -98,9 +98,11 @@ const TodoItem = () => {
           <span className="todo-trash" role="img" aria-label="delete" onClick={() => handleDelete(todo.id)}>🗑️</span>
           <span className={`todo-title${todo.completed ? ' completed' : ''}`}>{todo.title}</span>
           <span className="todo-icons">
-            <span className="todo-icon" role="img" aria-label="complete" onClick={() => markComplete(todo)}>✔️</span>
+            {todo.completed ? 
+              <span className="todo-icon" role="img" aria-label="cancel" onClick={() => markIncomplete(todo)}>❌</span>:
+              <span className="todo-icon" role="img" aria-label="complete" onClick={() => markComplete(todo)}>✔️</span>
+            }
             <span className="todo-icon" role="img" aria-label="edit">✏️</span>
-            <span className="todo-icon" role="img" aria-label="cancel" onClick={() => markIncomplete(todo)}>❌</span>
           </span>
         </li>
       ))}
