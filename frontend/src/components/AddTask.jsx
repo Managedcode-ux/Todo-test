@@ -40,6 +40,10 @@ const AddTask = ({ onTaskAdded }) => {
       } finally {
         setLoading(false);
       }
+    } else if (e.key === 'Escape') {
+      setShowInputs(false);
+      setTitle('');
+      setError(null);
     }
   };
 
