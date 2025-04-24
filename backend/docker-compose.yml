@@ -1,9 +1,20 @@
 version: '3.8'
 
 services:
+  todo-app:
+    build: . 
+    container_name: todo-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - my-postgres-db
+    environment:
+      - DATABASE_URL=postgres://postgres:password@my-postgres-db:5432/postgres
+
+
   my-postgres-db:
     image: postgres
-    container_name: todo-docker
+    container_name: todo-db
     ports:
       - "5432:5432"
     volumes:
